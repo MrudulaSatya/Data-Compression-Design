@@ -4,12 +4,21 @@ This project implements an algorithm in C to compress a given data buffer of byt
 
 ## Pre-requisites
 
-1. Tested on macOS 
-2. gcc compiler and make - In macOS run `xcode-select --install` in terminal to install gcc and make. 
+1. Tested on macOS and Windows 11 OS
+2. gcc compiler and make 
+3. In macOS run `xcode-select --install` in terminal to install gcc and make. 
+4. In windows 
+    - Download MSYS2 exe installer from msys2.org and install it. 
+    - Open the MSYS2 MSYS terminal
+    - Run `pacman -S --needed base-devel mingw-w64-x86_64-toolchain`
+    - Press enter after it prompts which toolchains to install and then press Y to start installation
+    - Open MSYS2 MinGW 64-bit terminal. 
+    - Verify install by running ` gcc --version` and `make --version   `
+
 
 ## How to build
 
-1. Clone project to local directory. Open Terminal and change directory to project folder 
+1. Clone project to local directory. Open Terminal (macOS) or MSYS2 MinGW 64-bit terminal (Windows OS) and change directory to project folder 
 2. Run the following make commands 
 ```
    make clean

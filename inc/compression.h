@@ -3,9 +3,10 @@
 #include <string.h>
 
 /** Macro Definitions */
-#define MAX_UINT8_VAL           (0xFF) // Maximum value of an unsigned 8-bit integer 
-#define MAX_VAL_IN_BUFFER       (0x7F) // Maximum number that can be stored in the array of bytes
-#define COMPRESS_ALGO_CONST     (0x80) // Constant that is added to a consecutively repeated byte to compress it and differentiate it from normal bytes
+#define MAX_UINT8_VAL               (0xFF)  // Maximum value of an unsigned 8-bit integer 
+#define MAX_VAL_IN_BUFFER           (0x7F)  // Maximum number that can be stored in the array of bytes
+#define COMPRESS_ALGO_CONST         (0x80)  // Constant that is added to a consecutively repeated byte to compress it and differentiate it from normal bytes
+#define MAX_SIZE_OF_DELETE_TABLE    (21845) // Maximum size of the array of DT structure
 
 //#define USE_ASSERT //Uncomment this line to activate assert statements inside function definition
 
@@ -29,6 +30,13 @@ typedef struct delete_table
     uint16_t len_to_be_deleted;
 } DT;
 
+/** 
+ * @brief Global array of delete_table (DT) structure that saves the starting indices and lengths of each sequence 
+ *  that should be removed from the array to compress it. These sequences are bytes that are repeating consecutively within the array. 
+ *  The compress function fills this table as it traverses through the array. It then uses this table to compact the array by shifting
+ *  the other elements into indices occupied by the bytes marked for deletion. 
+ **/
+extern DT del_t[MAX_SIZE_OF_DELETE_TABLE];
 
 /**
  * @brief Function compresses the array of bytes by identifying sequences of consecutively repeating bytes and 

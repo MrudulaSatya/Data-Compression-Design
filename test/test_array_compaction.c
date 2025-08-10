@@ -2,9 +2,6 @@
 #include "unity.h"
 #include <string.h>
 
-#define MAX_SIZE_OF_DELETE_TABLE    (21845)
-DT del_t[MAX_SIZE_OF_DELETE_TABLE];
-
 void setUp(void) {
 }
 

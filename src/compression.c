@@ -1,15 +1,6 @@
 #include "compression.h"
 #include <assert.h>
 
-/** Private macro definition */
-#define MAX_SIZE_OF_DELETE_TABLE    (21845) // Maximum size of the array of DT structure
-
-/** 
- * @brief Global array of delete_table (DT) structure that saves the starting indices and lengths of each sequence 
- *  that should be removed from the array to compress it. These sequences are bytes that are repeating consecutively within the array. 
- *  The compress function fills this table as it traverses through the array. It then uses this table to compact the array by shifting
- *  the other elements into indices occupied by the bytes marked for deletion. 
- **/
 DT del_t[MAX_SIZE_OF_DELETE_TABLE] = {0};
 
 /**
