@@ -5,7 +5,7 @@ This project implements an algorithm in C to compress a given data buffer of byt
 ## Pre-requisites
 
 1. Tested on macOS 
-2. gcc compiler
+2. gcc compiler and make - In macOS run `xcode-select --install` in terminal to install gcc and make. 
 
 ## How to build
 
@@ -14,6 +14,18 @@ This project implements an algorithm in C to compress a given data buffer of byt
 ```
    make clean
    make all
+```
+3. To run the main application 
+```
+    ./main_compress
+```
+4. To run unit tests on byte_compress
+```
+    ./test_compression
+```
+5. To run units tests on array_compaction
+```
+    ./test_array_compaction 
 ```
 
 ## Design Description
@@ -63,7 +75,7 @@ Psuedo-code for byte_compress algorithm
 ```
 Psuedo-code for array_compaction algorithm
 ```
-    compact_array(data_ptr):
+    array_compaction(data_ptr):
         Traverse delete_table:
             Copy 0 to delete_table[i].start_index to data_ptr
             Save the index at which the above copy ended. This index is called data_index. 
@@ -106,7 +118,7 @@ In the problem statement the signature of the byte_compress() function takes onl
 
 ## Testing Strategy
 
-1. Unity is used for unit testing byte_compress function (16 cases) and array_compaction (9 cases) function.
+1. Unity is used for unit testing byte_compress function (16 cases) and array_compaction function (9 cases).
 2. Edge cases such as if the input array is of size 0 or of maximum possible size of 65535 were tested. 
 3. Tested both of these functions for different types of inputs such if the values in the array are all 0x00 (min) or 0x7F (max). If the repetitive sequences are found in the beggining or middle or end of the array. 
 
