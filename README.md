@@ -96,14 +96,14 @@ Psuedo-code for array_compaction algorithm
 
 ## How I reached solution
 
-1. I had pre-requisite knowledge that zipping of files/folders is done by removing the sequences of consecutive repeated bytes. The problem statement too mentioned that the data buffer will commonly contain such sequences. I decided to focus on that. 
-2. I leveraged the fact that the data in the buffer contains numbers only from 0x00 to 0x7F. All the bytes starting from 0x80 were reserved. So I could use them in the compressing algorithm. 
-3. At first, I thought of compressing each repeated sequence into 3 bytes. The first byte would be 0x80 indicating that that next 2 bytes are special bytes. This information will be used by the decompression algorithm. The second byte would be the number of times the number repeated. The third byte would be the repeated byte itself. This would tell the decompression algorithm, repeat the third byte, 2nd byte number of times to decompress this array. 
-4. To further decrease the size of the compressed array, I thought of combining the information the first and 3rd byte provide into 1 byte. Thus, compressing each repeated sequence into 2 bytes. For combining, I decided to add the 0x80 to the value of the repeated value. As the maximum value of the repeated byte could be 0x7F, adding 0x80 to it would still be in bounds for a 8-bit unsigned integer. 
-5. If a character repeated more than 0xFF times, I decided to split the sequences each of size <= 0xFF.
-6. Next challenge was compact the array. The problem statement says that on compression, the data in the buffer is modified and size of the modified buffer is returned. 
-7. My first thought was to use another temporary array. I would copy the elements I want to keep in this temporary array first. Then copy this temporary array into the original data buffer. But this would mean a space complexity of O(n).
-8. The efficient way would be to perform the shift in place and use a seperate hash table style data structure to store the indices and lengths of sequences to be deleted. This way the sapce complexity would be O(d) where d is the number of sequences to be deleted. d will be less than n hence O(d) < O(n). 
+1.	I had pre-requisite knowledge that zipping of files/folders is done by removing the sequences of consecutive repeated bytes. The problem statement too mentioned that the data buffer will commonly contain such sequences. I decided to focus on that.
+2.	I leveraged the fact that the data in the buffer contains numbers only from 0x00 to 0x7F. All the bytes starting from 0x80 are reserved. So, I could use them in the compressing algorithm.
+3.	At first, I thought of compressing each repeated sequence into 3 bytes. The first byte would be 0x80 indicating that that next 2 bytes are special bytes. This information is used by the decompression algorithm. The second byte would be the number of times the number repeated. The third byte would be the repeated byte itself. This would tell the decompression algorithm, repeat the value indicated by the third byte, number of times indicated by the second byte to decompress this array.
+4.	To further improve my solution, I thought of combining the information the first and third byte provides into 1 byte. Thus, compressing each repeated sequence into 2 bytes. For combining, I decided to add 0x80 to the value of the repeated byte. As the maximum value of the repeated byte could be 0x7F, adding 0x80 to it would still be in bounds for an 8-bit unsigned integer.
+5.	If a character repeated more than 0xFF times, I decided to split the sequences each of size <= 0xFF.
+6.	Next challenge was compacting the buffer. The problem statement says that on compression, the data in the buffer is modified and size of the modified buffer is returned.
+7.	My first thought was to use another temporary array. I will copy the elements I want to keep in this temporary array first. Then copy this temporary array into the original data buffer. But this would mean a space complexity of O(n).
+8.	The efficient way would be to perform the shift in place and use a separate hash table style data structure to store the indices and lengths of sequences to be deleted. This way the space complexity would be O(d) where d is the number of sequences to be deleted. d will be less than n hence O(d) < O(n).
 
 ## Assumptions
 
